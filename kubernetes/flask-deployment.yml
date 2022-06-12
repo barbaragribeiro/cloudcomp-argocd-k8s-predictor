@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barbararibeiro-flask-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-predictor-pod
+  template:
+    metadata:
+      labels:
+        app: flask-predictor-pod
+    spec:
+      containers:
+      - name: flask-predictor-container
+        image: barbaragribeiro/flask-server-docker:latest
+        ports:
+        - containerPort: 5005
