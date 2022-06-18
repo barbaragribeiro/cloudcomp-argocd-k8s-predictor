@@ -26,7 +26,7 @@ def predict():
     text = request.get_json(force=True)["text"]
     if not isinstance(text, list):
         text = [text]
-        predicted = app._clf_pipeline.predict(text)[0]
+        predicted = int(app._clf_pipeline.predict(text)[0])
     else:
         predicted = app._clf_pipeline.predict(text).tolist()
 
