@@ -3,15 +3,14 @@ from flask import Flask
 from flask import request
 from flask.json import jsonify
 import pickle
-import time
-import os
+import urllib.request
 
-model_file = "ml-model/model.pickle"
+urllib.request.urlretrieve("https://github.com/barbaragribeiro/cloudcomp-argocd-k8s-predictor/raw/main/ml-model/model.pickle", "model.pickle")
 
 app = Flask(__name__)
-app._clf_pipeline = pickle.load(open(model_file, "rb"))
+app._clf_pipeline = pickle.load(open("model.pickle", "rb"))
 app._version = __version__
-app._model_date = time.ctime(os.path.getmtime(model_file))
+# app._model_date = time.ctime(os.path.getmtime(model_file))
 
 @app.route("/api/american", methods=["POST"])
 def predict():
@@ -23,7 +22,7 @@ def predict():
     return jsonify(
         is_american=predicted.tolist(),
         version=app._version,
-        model_date=app._model_date
+        model_date="test"
     )
 
 if __name__ == "__main__":
