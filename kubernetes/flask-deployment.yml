@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: flask-predictor-container
-        image: barbaragribeiro/flask-server-docker:bd332e5
+        image: barbaragribeiro/flask-server-docker:latest
         ports:
         - containerPort: 5005
